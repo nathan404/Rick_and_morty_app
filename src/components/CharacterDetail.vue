@@ -1,6 +1,8 @@
 <template>
   <div v-if="character">
+      <p>Name: {{character.name}}
       <p>Status: {{character.status}}</p>
+      <img class="face" :src="character.image"/>
   </div>
 </template>
 
@@ -16,7 +18,6 @@ export default {
     },
     mounted() {
         eventBus.$on("char-selected", character => {
-            // console.log(this.character, character)
             this.character = character;
         })
     }
