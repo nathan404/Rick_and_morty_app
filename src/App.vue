@@ -12,32 +12,51 @@ export default {
   name: 'app',
   data(){
     return {
+      // episodes1: [],
+      // episodes2: [],
       episodes: []
     }
   },
   components:{
     'episode-list': EpisodeList
   },
-  mounted() {
-    fetch("https://rickandmortyapi.com/api/episode/?page=1")
-      .then(res => res.json())
-      .then(episodeData => (this.episodes = episodeData.results));
-  }
-  // methods: {
-    // getEpisodes: function(){
-    //   const promises = [1, 2].map(num => {
-    //     return fetch(
-    //       "https://rickandmortyapi.com/api/episode/?page=${num}"
-    //       ).then(res => res.json());
-    //   });
+  // mounted() {
+    // fetch("https://rickandmortyapi.com/api/episode/?page=1")
+    //   .then(res => res.json())
+    //   .then(episodeData => (
+    //     this.episodes1 = episodeData.results,
+    //     this.episodes.push(this.episodes1)
+    //     ));
+ 
+    // fetch("https://rickandmortyapi.com/api/episode/?page=2")
+    //   .then(res => res.json())
+    //   .then(episodeData => (
+    //     this.episodes2 = episodeData.results,
+    //     this.episodes.push(this.episodes2)
+    //     ));
 
-    //   Promise.all(promises)
-    //     .then(episodeData => this.episodes = episodeData.);
-    // }
-  // },
-  // mounted(){
-    // this.getEpisodes;
   // }
+  methods: {
+    getEpisodes: function(){
+      const promises = [1, 2].map(num => {
+        return fetch(
+          `https://rickandmortyapi.com/api/episode/?page=${num}`
+        ).then(res => res.json());
+      });
+
+      Promise.all(promises)
+        .then(data => {
+          const episodeData = data.reduce(
+            (flat, toFlatten) => flat.concat(toFlatten.results),
+            []
+          );
+          this.episodes = episodeData;
+        })
+    }
+  },
+  mounted(){
+    this.getEpisodes();
+  }
 }
 </script>
 

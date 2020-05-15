@@ -1,6 +1,8 @@
 <template>
   <div>
-      
+      <ul>
+          <!-- <li v-for="(episode, index) in episodes" :key="index" :value="episode">{{episode.name}}</li> -->
+      </ul>
   </div>
 </template>
 
