@@ -1,28 +1,49 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+      <h1>Rick and Morty Episodes</h1>
+          <episode-list :episodes="episodes"></episode-list>  
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import EpisodeList from './components/EpisodeList'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: 'app',
+  data(){
+    return {
+      episodes: []
+    }
+  },
+  components:{
+    'episode-list': EpisodeList
+  },
+  mounted() {
+    fetch("https://rickandmortyapi.com/api/episode/?page=1")
+      .then(res => res.json())
+      .then(episodeData => (this.episodes = episodeData.results));
   }
+  // methods: {
+    // getEpisodes: function(){
+    //   const promises = [1, 2].map(num => {
+    //     return fetch(
+    //       "https://rickandmortyapi.com/api/episode/?page=${num}"
+    //       ).then(res => res.json());
+    //   });
+
+    //   Promise.all(promises)
+    //     .then(episodeData => this.episodes = episodeData.);
+    // }
+  // },
+  // mounted(){
+    // this.getEpisodes;
+  // }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+h1 {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding: 1rem;
 }
 </style>
