@@ -20,22 +20,6 @@ export default {
   components:{
     'episode-list': EpisodeList
   },
-  // mounted() {
-    // fetch("https://rickandmortyapi.com/api/episode/?page=1")
-    //   .then(res => res.json())
-    //   .then(episodeData => (
-    //     this.episodes1 = episodeData.results,
-    //     this.episodes.push(this.episodes1)
-    //     ));
- 
-    // fetch("https://rickandmortyapi.com/api/episode/?page=2")
-    //   .then(res => res.json())
-    //   .then(episodeData => (
-    //     this.episodes2 = episodeData.results,
-    //     this.episodes.push(this.episodes2)
-    //     ));
-
-  // }
   methods: {
     getEpisodes: function(){
       const promises = [1, 2].map(num => {
