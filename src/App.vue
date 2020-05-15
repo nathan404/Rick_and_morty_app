@@ -1,12 +1,17 @@
 <template>
   <div>
-      <h1>Rick and Morty Episodes</h1>
-          <episode-list :episodes="episodes"></episode-list>  
+      <h1>Rick and Morty Characters</h1>
+          <character-list :characters="characters"></character-list>  
+          <character-detail />
+      <h2>Episodes</h2>
+          <episode-list :episodes="episodes"></episode-list>
   </div>
 </template>
 
 <script>
 import EpisodeList from './components/EpisodeList'
+import CharacterList from './components/CharacterList'
+import CharacterDetail from './components/CharacterDetail'
 
 export default {
   name: 'app',
@@ -17,7 +22,9 @@ export default {
     }
   },
   components:{
-    'episode-list': EpisodeList
+    'episode-list': EpisodeList,
+    'character-list': CharacterList,
+    'character-detail': CharacterDetail
   },
   methods: {
      getEpisodes: function(){
@@ -67,4 +74,5 @@ h1 {
   text-align: center;
   padding: 1rem;
 }
+
 </style>
