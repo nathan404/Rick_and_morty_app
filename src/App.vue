@@ -12,16 +12,15 @@ export default {
   name: 'app',
   data(){
     return {
-      // episodes1: [],
-      // episodes2: [],
-      episodes: []
+      episodes: [],
+      characters: []
     }
   },
   components:{
     'episode-list': EpisodeList
   },
   methods: {
-    getEpisodes: function(){
+     getEpisodes: function(){
       const promises = [1, 2].map(num => {
         return fetch(
           `https://rickandmortyapi.com/api/episode/?page=${num}`
@@ -36,10 +35,29 @@ export default {
           );
           this.episodes = episodeData;
         })
+    },
+
+    getCharacters: function(){
+      // const charPromises = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(num => {
+      const charPromises = [1, 2, 3].map(num => {
+        return fetch(
+          `https://rickandmortyapi.com/api/character/?page=${num}`
+        ).then(res => res.json());
+      });
+
+      Promise.all(charPromises)
+        .then(data => {
+          const charData = data.reduce(
+            (flat, toFlatten) => flat.concat(toFlatten.results),
+            []
+          );
+          this.characters = charData;
+        })
     }
   },
   mounted(){
     this.getEpisodes();
+    this.getCharacters();
   }
 }
 </script>
