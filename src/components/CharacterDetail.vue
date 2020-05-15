@@ -14,8 +14,9 @@ export default {
             character: null
         }
     },
-    mounted(){
-        eventBus.$on("character-selected", character => {
+    mounted() {
+        eventBus.$on("char-selected", character => {
+            // console.log(this.character, character)
             this.character = character;
         })
     }
