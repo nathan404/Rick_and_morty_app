@@ -1,11 +1,18 @@
 <template>
   <div>
-      <h1>Rick and Morty Characters</h1>
+    <div class="main-container">
+      <div class="characters">
+      <h3>Rick and Morty Characters</h3>
           <character-list :characters="characters"></character-list>  
           <character-detail :character="selectedChar"></character-detail>
-          <!-- <fav-character /> -->
-      <h2>Episodes</h2>
+          <fav-character :favChars="favChars"/>
+      </div>
+      
+      <div class="episodes">
+        <h3>Episodes</h3>
           <episode-list :episodes="episodes"></episode-list>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,7 +21,7 @@ import { eventBus } from "./main.js"
 import EpisodeList from './components/EpisodeList'
 import CharacterList from './components/CharacterList'
 import CharacterDetail from './components/CharacterDetail'
-// import FavCharacter from './components/FavCharacter'
+import FavCharacter from './components/FavCharacter'
 
 export default {
   name: 'app',
@@ -22,15 +29,15 @@ export default {
     return {
       episodes: [],
       characters: [],
-      selectedChar: null
-      // favChars: []
+      selectedChar: null,
+      favChars: []
     }
   },
   components:{
     'episode-list': EpisodeList,
     'character-list': CharacterList,
     'character-detail': CharacterDetail,
-    // 'fav-character': FavCharacter
+    'fav-character': FavCharacter
   },
   methods: {
      getEpisodes: function(){
@@ -68,13 +75,13 @@ export default {
         })
     },
 
-      // addFavourite: function(character) {
-      //   this.favChars.push(this.selectedChar)
-      // },
+      addFavourite: function() {
+        this.favChars.push(this.selectedChar)
+      },
 
-      // removeFavourite: function(character) {
-      //   this.favChars.splice(this.favChars.indexOf(character), 1)
-      // }
+      removeFavourite: function(character) {
+        this.favChars.splice(this.favChars.indexOf(character), 1)
+      }
   },
   mounted(){
     this.getEpisodes();
@@ -82,17 +89,21 @@ export default {
 
     eventBus.$on("char-selected", character => (this.selectedChar = character));
 
-    // eventBus.$on("fav-added", character => (this.addFavourite(character)));
+    eventBus.$on("fav-added", character => (this.addFavourite(character)));
 
-    // eventBus.$on("fav-removed", character => (this.removeFavourite(character)));
+    eventBus.$on("fav-removed", character => (this.removeFavourite(character)));
   }
 }
 </script>
 
 <style>
-h1 {
+/* h1 {
   text-align: center;
   padding: 1rem;
-}
+} */
 
+.main-container {
+  display: flex;
+  justify-content: space-between;
+}
 </style>
