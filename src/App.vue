@@ -21,7 +21,7 @@ export default {
     return {
       episodes: [],
       characters: [],
-      // selectedChar: null,
+      selectedChar: null
       // favChars: []
     }
   },
