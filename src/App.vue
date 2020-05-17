@@ -5,7 +5,7 @@
       <h3>Rick and Morty Characters</h3>
           <character-list :characters="characters"></character-list>  
           <character-detail :character="selectedChar"></character-detail>
-          <fav-character v-if="selectedChar" :favChars="favChars"></fav-character>
+          <fav-character v-if="selectedChar" :favChars="favCharacters"></fav-character>
       </div>
       
       <div class="episodes">
@@ -30,7 +30,8 @@ export default {
       episodes: [],
       characters: [],
       selectedChar: null,
-      favChars: []
+      favCharacters: [],
+      character: null
     }
   },
   components:{
@@ -59,7 +60,7 @@ export default {
 
     getCharacters: function(){
       // const charPromises = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(num => {
-      const charPromises = [15].map(num => {
+      const charPromises = [22].map(num => {
         return fetch(
           `https://rickandmortyapi.com/api/character/?page=${num}`
         ).then(res => res.json());
@@ -76,11 +77,11 @@ export default {
     },
 
       addFavourite: function() {
-        this.favChars.push(this.selectedChar)
+        this.favCharacters.push(this.selectedChar)
       },
 
       removeFavourite: function(character) {
-        this.favChars.splice(this.favChars.indexOf(character), 1)
+        this.favCharacters.splice(this.favCharacters.indexOf(this.character), 1)
       }
   },
   mounted(){

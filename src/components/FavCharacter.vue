@@ -2,7 +2,7 @@
     <div>
         <h3>Your favourite characters</h3>
                 <p>Is this a favourite character? {{character}}</p>
-                <button v-if="!favChars.includes(character)" v-on:click="addFavourite">Add character to favourites</button>
+                <button v-if="!favCharacters.includes(character)" v-on:click="addFavourite">Add character to favourites</button>
                 <p>Favourite characters list</p>
                 <ul>
                     <li v-for="(character, index) in favChars" :character="character" :key="index">
@@ -21,15 +21,15 @@ export default {
     props: ['favChars'],
     data(){
         return {
-            // character: {}
-            // favCharacters: []
+            character: {},
+            favCharacters: []
         }
     },
     methods: {
-        addFavourite(){
+        addFavourite: function(){
             eventBus.$emit("fav-added", this.character)
         },
-        removeFavourite(){
+        removeFavourite: function(){
             eventBus.$emit("fav-removed", this.character)
         }
     }
