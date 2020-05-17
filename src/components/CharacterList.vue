@@ -28,7 +28,7 @@ export default {
     props: ['characters'],
     data(){
         return {
-            selectedChar: null,
+            // selectedChar: null,
             // favChars: []
         }
     },

@@ -14,7 +14,7 @@ export default {
     props: ['character'],
     data(){
         return {
-            character: null
+            // selectedCharacter: null
         }
     }
     // mounted() {
