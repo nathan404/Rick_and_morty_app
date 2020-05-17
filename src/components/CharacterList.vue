@@ -2,16 +2,18 @@
   <div>
       <ol>
           <li v-for="(character, index) in characters" :key="index" :value="character" v-on:click="handleSelect(character)">{{character.name}}</li>
-            <!-- <char-listunit v-for="(character, index) in characters" :character="character" :key="index"></char-listunit> -->
       </ol>
 
-       <!-- <h3>Your favourite characters</h3>
-            <div v-if="selectedChar">
-                <p>Is this a favourite character? {{selectedChar.name}}</p>
-                <button v-if="!favChars.includes(selectedChar)" v-on:click="addToFav">Add character to favourites</button>
+            <!-- <h3>Your favourite characters</h3> -->
+            <!-- <div v-if="selectedChar"> -->
+                <!-- <p>Is this a favourite character? {{selectedChar}}</p>
+                <button v-if="!favChars.includes(selectedChar)" v-on:click="addFavourite">Add character to favourites</button>
                 <p>Favourite characters list</p>
                 <ul>
-                    <li v-for="(character, index) in favChars" :character="character" :key="index">{{selectedChar}} <button v-on:click="removeFav(character)">Deselect {{character}}</button></li>
+                    <li v-for="(character, index) in favChars" :character="character" :key="index">
+                        {{character.name}} 
+                        <button v-on:click="removeFavourite(character)">Deselect {{character.name}}</button>
+                    </li>
                 </ul>
             </div> -->
   </div>
@@ -24,24 +26,21 @@ import { eventBus } from "../main.js"
 export default {
     name: 'character-list',
     props: ['characters'],
-    // components: {
-    //     "char-listunit": CharListUnit
-    // }
-    // data(){
-    //     return {
-    //         selectedChar: null,
-    //         // favChars: []
-    //     }
-    // },
+    data(){
+        return {
+            selectedChar: null,
+            // favChars: []
+        }
+    },
     methods: {
         handleSelect(character){
             eventBus.$emit('char-selected', character)
-        },
-        //  addToFav(){
-        //     this.favChars.push(this.selectedChar)
+        }
+        // addFavourite(){
+        //     eventBus.$emit("fav-added", this.selectedChar)
         // },
-        // removeFav(character){
-        //     this.favChars.splice(this.favChars.indexOf(character), 1)
+        // removeFavourite(character){
+        //     eventBus.$emit("fav-removed", this.character)
         // }
     }
 }

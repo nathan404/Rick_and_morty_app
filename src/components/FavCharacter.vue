@@ -23,13 +23,12 @@ export default {
     props: ['favChars'],
     data(){
         return {
-            character: {} 
-            // favChars: []
+            character: {}, 
+            favChars: []
         }
     },
     methods: {
         addFavourite(){
-            console.log(this.character)
             eventBus.$emit("fav-added", this.character)
         },
         removeFavourite(character){
