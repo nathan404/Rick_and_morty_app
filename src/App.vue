@@ -3,6 +3,7 @@
       <h1>Rick and Morty Characters</h1>
           <character-list :characters="characters"></character-list>  
           <character-detail />
+          <fav-character />
       <h2>Episodes</h2>
           <episode-list :episodes="episodes"></episode-list>
   </div>
@@ -12,19 +13,23 @@
 import EpisodeList from './components/EpisodeList'
 import CharacterList from './components/CharacterList'
 import CharacterDetail from './components/CharacterDetail'
+import FavCharacter from './components/FavCharacter'
 
 export default {
   name: 'app',
   data(){
     return {
       episodes: [],
-      characters: []
+      characters: [],
+      selectedChar: null,
+      favChars: []
     }
   },
   components:{
     'episode-list': EpisodeList,
     'character-list': CharacterList,
-    'character-detail': CharacterDetail
+    'character-detail': CharacterDetail,
+    'fav-character': FavCharacter
   },
   methods: {
      getEpisodes: function(){
@@ -60,11 +65,25 @@ export default {
           );
           this.characters = charData;
         })
-    }
+    },
+
+      addFavourite: function(character) {
+        this.favChars.push(this.selectedChar)
+      },
+
+      removeFavourite: function(character) {
+        this.favChars.splice(this.favChars.indexOf(character), 1)
+      }
   },
   mounted(){
     this.getEpisodes();
     this.getCharacters();
+
+    eventBus.$on("char-selected", character => (this.selectedChar = character));
+
+    eventBus.$on("fav-added", character => (this.addFavourite(character)));
+
+    eventBus.$on("fav-removed", character => (this.removeFavourite(character)));
   }
 }
 </script>
