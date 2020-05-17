@@ -2,7 +2,7 @@
   <div>
       <h1>Rick and Morty Characters</h1>
           <character-list :characters="characters"></character-list>  
-          <character-detail />
+          <character-detail :character="selectedChar"></character-detail>
           <!-- <fav-character /> -->
       <h2>Episodes</h2>
           <episode-list :episodes="episodes"></episode-list>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { eventBus } from "./main.js"
 import EpisodeList from './components/EpisodeList'
 import CharacterList from './components/CharacterList'
 import CharacterDetail from './components/CharacterDetail'
@@ -79,7 +80,7 @@ export default {
     this.getEpisodes();
     this.getCharacters();
 
-    // eventBus.$on("char-selected", character => (this.selectedChar = character));
+    eventBus.$on("char-selected", character => (this.selectedChar = character));
 
     // eventBus.$on("fav-added", character => (this.addFavourite(character)));
 
