@@ -3,19 +3,8 @@
       <ol>
           <li v-for="(character, index) in characters" :key="index" :value="character" v-on:click="handleSelect(character)">{{character.name}}</li>
       </ol>
-
-            <!-- <h3>Your favourite characters</h3> -->
-            <!-- <div v-if="selectedChar"> -->
-                <!-- <p>Is this a favourite character? {{selectedChar}}</p>
-                <button v-if="!favChars.includes(selectedChar)" v-on:click="addFavourite">Add character to favourites</button>
-                <p>Favourite characters list</p>
-                <ul>
-                    <li v-for="(character, index) in favChars" :character="character" :key="index">
-                        {{character.name}} 
-                        <button v-on:click="removeFavourite(character)">Deselect {{character.name}}</button>
-                    </li>
-                </ul>
-            </div> -->
+    <!-- <button v-if="!character.isFavourite" v-on:click="addFavourite">Add to Favourites</button> -->
+    <!-- <button v-if="character.isFavourite" v-on:click="removeFavourite">Remove from Favourites</button> -->
   </div>
 </template>
 
@@ -35,11 +24,11 @@ export default {
     methods: {
         handleSelect(character){
             eventBus.$emit('char-selected', character)
-        }
-        // addFavourite(){
-        //     eventBus.$emit("fav-added", this.selectedChar)
+        },
+        // addFavourite: function(){
+        //     eventBus.$emit("fav-added", this.character)
         // },
-        // removeFavourite(character){
+        // removeFavourite: function(){
         //     eventBus.$emit("fav-removed", this.character)
         // }
     }

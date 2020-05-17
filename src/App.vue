@@ -30,16 +30,20 @@ export default {
       episodes: [],
       characters: [],
       selectedChar: null,
-      favCharacters: [],
-      character: null
+      favCharacters: []
     }
   },
-  components:{
+  components: {
     'episode-list': EpisodeList,
     'character-list': CharacterList,
     'character-detail': CharacterDetail,
     'fav-character': FavCharacter
   },
+  // computed: {
+  //   favourites: function(){
+  //     return this.characters.filter(character => character.isFavourite);
+  //   }
+  // },
   methods: {
      getEpisodes: function(){
       const promises = [1, 2].map(num => {
@@ -72,16 +76,21 @@ export default {
             (flat, toFlatten) => flat.concat(toFlatten.results),
             []
           );
+          charData.forEach(character => (character.isFavourite = false));
           this.characters = charData;
         })
     },
 
-      addFavourite: function() {
+      addFavourite: function(character) {
         this.favCharacters.push(this.selectedChar)
+        // const index = this.characters.indexOf(character);
+        // this.characters[index].isFavourite = true;
       },
 
       removeFavourite: function(character) {
         this.favCharacters.splice(this.favCharacters.indexOf(this.character), 1)
+        // const index = this.characters.indexOf(character);
+        // this.characters[index].isFavourite = false;
       }
   },
   mounted(){
@@ -90,9 +99,9 @@ export default {
 
     eventBus.$on("char-selected", character => (this.selectedChar = character));
 
-    eventBus.$on("fav-added", character => (this.addFavourite(character)));
+    eventBus.$on("fav-added", character => this.addFavourite(character));
 
-    eventBus.$on("fav-removed", character => (this.removeFavourite(character)));
+    eventBus.$on("fav-removed", character => this.removeFavourite(character));
   }
 }
 </script>

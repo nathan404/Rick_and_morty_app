@@ -17,7 +17,7 @@
 import { eventBus } from "../main.js"
 
 export default {
-    name: "fav-character",
+    // name: "fav-character",
     props: ['favChars'],
     data(){
         return {
