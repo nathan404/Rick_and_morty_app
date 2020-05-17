@@ -3,7 +3,7 @@
       <h1>Rick and Morty Characters</h1>
           <character-list :characters="characters"></character-list>  
           <character-detail />
-          <fav-character />
+          <!-- <fav-character /> -->
       <h2>Episodes</h2>
           <episode-list :episodes="episodes"></episode-list>
   </div>
@@ -13,7 +13,7 @@
 import EpisodeList from './components/EpisodeList'
 import CharacterList from './components/CharacterList'
 import CharacterDetail from './components/CharacterDetail'
-import FavCharacter from './components/FavCharacter'
+// import FavCharacter from './components/FavCharacter'
 
 export default {
   name: 'app',
@@ -21,15 +21,15 @@ export default {
     return {
       episodes: [],
       characters: [],
-      selectedChar: null,
-      favChars: []
+      // selectedChar: null,
+      // favChars: []
     }
   },
   components:{
     'episode-list': EpisodeList,
     'character-list': CharacterList,
     'character-detail': CharacterDetail,
-    'fav-character': FavCharacter
+    // 'fav-character': FavCharacter
   },
   methods: {
      getEpisodes: function(){
@@ -67,23 +67,23 @@ export default {
         })
     },
 
-      addFavourite: function(character) {
-        this.favChars.push(this.selectedChar)
-      },
+      // addFavourite: function(character) {
+      //   this.favChars.push(this.selectedChar)
+      // },
 
-      removeFavourite: function(character) {
-        this.favChars.splice(this.favChars.indexOf(character), 1)
-      }
+      // removeFavourite: function(character) {
+      //   this.favChars.splice(this.favChars.indexOf(character), 1)
+      // }
   },
   mounted(){
     this.getEpisodes();
     this.getCharacters();
 
-    eventBus.$on("char-selected", character => (this.selectedChar = character));
+    // eventBus.$on("char-selected", character => (this.selectedChar = character));
 
-    eventBus.$on("fav-added", character => (this.addFavourite(character)));
+    // eventBus.$on("fav-added", character => (this.addFavourite(character)));
 
-    eventBus.$on("fav-removed", character => (this.removeFavourite(character)));
+    // eventBus.$on("fav-removed", character => (this.removeFavourite(character)));
   }
 }
 </script>
