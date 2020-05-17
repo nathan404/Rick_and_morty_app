@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Your favourite characters</h3>
-                <p>Is this a favourite character? {{character}}</p>
+                <p>Is this a favourite character?</p>
                 <button v-if="!favCharacters.includes(character)" v-on:click="addFavourite">Add character to favourites</button>
                 <p>Favourite characters list</p>
                 <ul>

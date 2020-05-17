@@ -2,6 +2,8 @@
   <div v-if="character">
       <p>Name: {{character.name}}
       <p>Status: {{character.status}}</p>
+      <p>Location: {{character.location.name}}</p>
+      <p>Episodes: {{character.episode}}</p>
       <img class="face" :src="character.image"/>
   </div>
 </template>

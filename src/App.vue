@@ -39,11 +39,6 @@ export default {
     'character-detail': CharacterDetail,
     'fav-character': FavCharacter
   },
-  // computed: {
-  //   favourites: function(){
-  //     return this.characters.filter(character => character.isFavourite);
-  //   }
-  // },
   methods: {
      getEpisodes: function(){
       const promises = [1, 2].map(num => {
@@ -64,7 +59,7 @@ export default {
 
     getCharacters: function(){
       // const charPromises = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(num => {
-      const charPromises = [23].map(num => {
+      const charPromises = [25].map(num => {
         return fetch(
           `https://rickandmortyapi.com/api/character/?page=${num}`
         ).then(res => res.json());
@@ -76,21 +71,16 @@ export default {
             (flat, toFlatten) => flat.concat(toFlatten.results),
             []
           );
-          charData.forEach(character => (character.isFavourite = false));
           this.characters = charData;
         })
     },
 
       addFavourite: function(character) {
         this.favCharacters.push(this.selectedChar)
-        // const index = this.characters.indexOf(character);
-        // this.characters[index].isFavourite = true;
       },
 
       removeFavourite: function(character) {
         this.favCharacters.splice(this.favCharacters.indexOf(this.character), 1)
-        // const index = this.characters.indexOf(character);
-        // this.characters[index].isFavourite = false;
       }
   },
   mounted(){
@@ -107,11 +97,6 @@ export default {
 </script>
 
 <style>
-/* h1 {
-  text-align: center;
-  padding: 1rem;
-} */
-
 .main-container {
   display: flex;
   justify-content: space-between;
